@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Logement - Page d'Accueil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); /* Ajoute un effet de texte */
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+        
+        .hero p {
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 20px 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero .btn {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px; /* Coins arrondis */
+            overflow: hidden; /* Coupe les débordements */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation lors du survol */
+        }
+
+        .card:hover {
+            transform: translateY(-10px); /* Légère élévation */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+        }
+
+        .card-img-top {
+            height: 200px; /* Taille fixe pour les images */
+            object-fit: cover; /* Ajuste les images à la taille sans déformation */
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .card .btn {
+            background-color: #007bff; /* Bouton bleu Bootstrap */
+            color: #fff;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.9rem;
+        }
+
+    </style>
+    
+</head>
+<body>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark w-100">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="bi bi-tree-fill"></i> Eco-Logement</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    <!-- Section principale (Hero) -->
+    <div class="hero">
+        <h1><i class="bi bi-house-door-fill"></i> Bienvenue dans votre logement éco-responsable</h1>
+        <p>Suivez et gérez votre consommation d'énergie, d'eau, et plus encore, pour un avenir plus vert!</p>
+        <a href="#services" class="btn btn-primary mt-3">Découvrir nos services</a>
+    </div>
+
+
+    <!-- Contenu principal (Services) -->
+    <section id="services" class="container my-5">
+        <h2 class="section-title">Nos services</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.Du0_KSSMwOg69XCaGiu59AHaFC?rs=1&pid=ImgDetMain" class="card-img-top" alt="Consommation">
+                    <div class="card-body">
+                        <h5 class="card-title">Consommation</h5>
+                        <p class="card-text">Visualisez les factures et suivez votre consommation d'énergie, d'eau et autres ressources avec des graphiques détaillés.</p>
+                        <a href="consommation.html" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://img.freepik.com/premium-photo/3d-blueprint-plan-smart-home-with-icons-iot-devices-smart-home-conceptual-banner-building-house-system-internet-things-iot-smart-home-technology-system-remote-controls-domestic-devices_865659-20387.jpg" class="card-img-top" alt="Logements">
+                    <div class="card-body">
+                        <h5 class="card-title">Logements</h5>
+                        <p class="card-text">Consultez la liste de vos logements et gérez leur consommation et paramètres de manière centralisée.</p>
+                        <a href="logements.html" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://thumbs.dreamstime.com/b/smart-home-control-panel-front-view-futuristic-interface-remote-house-d-render-119640939.jpg" class="card-img-top" alt="Configuration">
+                    <div class="card-body">
+                        <h5 class="card-title">Configuration</h5>
+                        <p class="card-text">Configurez et gérez vos capteurs et actionneurs pour optimiser la consommation de vos ressources.</p>
+                        <a href="configuration.html" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w-100">
+        <p>&copy; 2024 Eco-Logement | Tous droits réservés</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

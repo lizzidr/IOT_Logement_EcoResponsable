@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Logements</title>
+    <!-- Lien vers le CDN Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Section contenant la liste des logements */
+        #logement-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Liste des logements */
+        #logement-list {
+            display: flex;
+            flex-wrap: wrap; /* Permet aux cartes de se repositionner selon l'espace disponible */
+            justify-content: center; /* Centrer les cartes */
+            gap: 20px; /* Espacement entre les cartes */
+        }
+
+        /* Style pour chaque logement */
+        .logement {
+            background: rgba(255, 255, 255, 0.9); /* Fond semi-transparent pour un aspect moderne */
+            border: 1px solid #d3d3d3; /* Contour gris clair */
+            border-radius: 10px; /* Coins arrondis */
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+            padding: 20px;
+            width: 300px; /* Largeur fixe harmonieuse */
+            text-align: center;
+            color: #333; /* Couleur de texte */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition douce */
+            overflow: hidden; /* Coupe les débordements éventuels */
+        }
+
+        /* Effet au survol */
+        .logement:hover {
+            transform: translateY(-10px); /* Légère élévation */
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+            border-color: #c0c0c0; /* Contour légèrement plus foncé au survol */
+        }
+
+        /* Titre dans chaque logement */
+        .logement h4 {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #007bff; /* Couleur principale */
+            margin-bottom: 10px;
+        }
+
+        /* Texte de description */
+        .logement p {
+            margin: 10px 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #555; /* Couleur de texte harmonieuse */
+        }
+
+        /* Bouton dans chaque logement */
+        .logement .btn {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .logement .btn:hover {
+            background-color: #0056b3; /* Couleur plus foncée au survol */
+        }
+
+
+        /* Style général pour la carte principale contenant les logements */
+        .card {
+            background: rgba(255, 255, 255, 0.95); /* Fond blanc légèrement transparent */
+            border-radius: 15px; /* Coins arrondis pour un look moderne */
+            border: 1px solid #d3d3d3; /* Contour gris clair pour un aspect propre */
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15); /* Ombre douce pour la profondeur */
+            padding: 30px; /* Espacement interne généreux */
+            width: 100%; /* Prend toute la largeur disponible */
+            max-width: 800px; /* Largeur maximale pour limiter la taille */
+            margin: 0 auto; /* Centre la carte dans la section */
+            text-align: center; /* Centre le texte à l'intérieur */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition douce pour les interactions */
+        }
+
+        /* Effet au survol */
+        .card:hover {
+            transform: translateY(-5px); /* Légère élévation pour un effet interactif */
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+        }
+
+        /* En-tête de la carte */
+        .card-header {
+            font-weight: bold;
+            font-size: 1.5rem; /* Taille de police plus grande pour l'en-tête */
+            color: #007bff; /* Bleu harmonisé avec le thème */
+            margin-bottom: 20px; /* Espacement avec le contenu */
+            border-bottom: 2px solid #e0e0e0; /* Ligne décorative sous le titre */
+            padding-bottom: 10px; /* Espacement sous le texte */
+        }
+
+        /* Corps de la carte */
+        .card-body {
+            font-size: 1rem; /* Taille de texte standard */
+            color: #555; /* Couleur gris foncé pour un contraste doux */
+            line-height: 1.6; /* Améliore la lisibilité */
+        }
+
+        .card h3 {
+            color: #555;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        /* Style de la barre de défilement (si nécessaire) */
+        .scrollable-list {
+            max-height: 400px; /* Hauteur max si trop de logements */
+            overflow-y: auto;
+            scrollbar-width: thin; /* Épaisseur réduite de la barre de défilement */
+            scrollbar-color: #007bff #f5f5f5; /* Couleur primaire pour le scroll */
+        }
+
+        .scrollable-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollable-list::-webkit-scrollbar-thumb {
+            background-color: #007bff;
+            border-radius: 10px;
+        }
+
+        .scrollable-list::-webkit-scrollbar-track {
+            background-color: #f5f5f5;
+        }
+
+
+
+        #form-section h3 {
+            font-size: 1.5rem;
+            text-align: center;
+            color: #000000; /* Couleur bleue */
+        }
+
+        /* Champs de saisie du formulaire */
+        #form-section .form-control {
+            background: rgb(255, 255, 255); /* Fond semi-transparent */
+            border-radius: 8px;
+            border: 1px solid rgb(0, 0, 0); /* Bordure semi-transparente */
+            color: white;
+            margin-bottom: 15px;
+            backdrop-filter: blur(5px); /* Flou léger sur les champs */
+        }
+
+        #form-section .form-control:focus {
+            border-color: #007bff; /* Focus bleu clair */
+            background: rgba(255, 255, 255, 0.5); /* Augmenter la visibilité sur focus */
+        }
+
+        /* Style du bouton flottant (Floating Button) */
+        .floating-btn {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-btn:focus {
+            outline: none;
+        }
+
+        /* Formulaire caché par défaut */
+        #form-section {
+            display: none;
+            pointer-events: auto; /* Assure que le formulaire soit interactif */
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgb(255, 255, 255); /* Fond non transparent */
+            backdrop-filter: blur(10px); /* Applique un flou autour du formulaire sans affecter le formulaire lui-même */
+            border-radius: 15px;
+            border: #000000;
+            padding: 30px;
+            max-width: 500px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        /* Formulaire visible */
+        #form-section.show {
+            display: block; /* Affiche le formulaire */
+            opacity: 1;
+        }
+
+        #form-section button[type="submit"] {
+            background-color: #007bff;
+            width: 10px;
+        }
+
+        #form-section button[type="submit"]:hover {
+            background-color: #007bff;
+        }
+
+        /* Bouton de fermeture du formulaire */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ffffff;
+            color: #9b9b9b;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1050;
+        }
+
+        .close-btn:hover {
+            color: #454545;
+        }
+
+        /* Rendre le backdrop non cliquable */
+        .backdrop {
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0);  /* Ombre semi-transparente */
+            z-index: 1050;
+            pointer-events: none; /* Désactive l'interaction avec le backdrop */
+            backdrop-filter: blur(5px); /* Appliquer un flou de fond sur le backdrop */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1><i class="bi bi-house-door-fill"></i> Gestion des Logements</h1>
+        <p>Ajoutez, gérez et consultez vos logements en un clic !</p>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark w-100">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-tree-fill"></i> Eco-Logement</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="logements.html">Logements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="consommation.html">Consommation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="configuration.html">Configuration</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content: List of Housings -->
+    <section id="logement-container" class="container my-5">
+        <div class="card">
+
+                <h3>Liste des Logements</h3>
+
+
+                <div id="logement-list"  class="scrollable-list">
+                    <!-- Housing items will be dynamically added here via JavaScript -->
+                </div>
+
+        </div>
+    </section>
+
+    <!-- Backdrop -->
+    <div class="backdrop"></div>
+
+    <!-- Add Housing Form -->
+    <div id="form-section">
+        <button class="close-btn btn-close" aria-label="Close">
+            <i class="bi bi-x"></i> <!-- Icône explicite de fermeture -->
+        </button>
+        <h3>Ajouter un Logement</h3>
+        <form id="add-logement-form">
+            <div class="mb-3">
+                <label for="adresse" class="form-label">Adresse</label>
+                <input type="text" class="form-control" id="adresse" placeholder="Entrez l'adresse du logement" required>
+            </div>
+            <div class="mb-3">
+                <label for="num_tel" class="form-label">Numéro de téléphone</label>
+                <input type="tel" class="form-control" id="num_tel" placeholder="Entrez le numéro de téléphone" required>
+            </div>
+            <div class="mb-3">
+                <label for="adresse_IP" class="form-label">Adresse IP</label>
+                <input type="text" class="form-control" id="adresse_IP" placeholder="Entrez l'adresse IP">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Ajouter le logement</button>
+        </form>
+    </div>
+
+    <!-- Floating Add Button -->
+    <button class="floating-btn" id="add-logement-btn"><i class="bi bi-plus"></i></button>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Eco-Logement. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // JavaScript for toggling the form visibility
+        const addButton = document.getElementById('add-logement-btn');
+        const formSection = document.getElementById('form-section');
+        const closeButton = document.querySelector('#form-section .close-btn');
+        const backdrop = document.querySelector('.backdrop');
+
+        // Show form with opacity transition
+        addButton.addEventListener('click', () => {
+            formSection.classList.add('show');
+            backdrop.style.display = 'block';
+        });
+
+        // Hide form and backdrop
+        const hideForm = () => {
+            formSection.classList.remove('show');
+            backdrop.style.display = 'none';
+        };
+
+        closeButton.addEventListener('click', hideForm);
+        backdrop.addEventListener('click', hideForm);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/logements.js"></script>
+</body>
+</html>

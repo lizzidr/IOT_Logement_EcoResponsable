@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centre de Gestion - Configuration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Lien vers Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Lien vers FontAwesome pour les icônes -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Container for Main Content */
+        #config-container {
+            display: flex;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Left Panel */
+        #left-panel {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #left-panel-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        #left-panel-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #left-panel-list .list-group-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        #left-panel-list .list-group-item:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Right Panel */
+        #right-panel {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            width: 40%;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #right-panel-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Forms */
+        form {
+            background: rgba(255, 255, 255, 0);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        form h4 {
+            color: #ffffff;
+            margin-top: 1px;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 30px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.6);
+            color: #333;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: px;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .toggle-btn {
+            background-color: transparent;
+            color: #007bff;
+            padding: 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            
+        }
+
+        .toggle-btn:hover {
+            background-color: #007bff;
+            color: white;
+            transform: scale(1.1);
+            
+        }
+
+        /* Custom Scrollbar */
+        #left-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #left-panel::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+
+        #left-panel::-webkit-scrollbar-thumb:hover {
+            background-color: #999;
+        }
+
+        .mini-card {
+            display: inline-block;
+            text-align: center;
+            width: 150px;
+            margin: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        .mini-card:hover {
+            transform: scale(1.1);
+        }
+
+        .mini-card .card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mini-card .card-title {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: #ffffff;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+
+    
+    </style>
+
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1><i class="bi bi-tools"></i> Configuration des Logements</h1>
+        <p>Configurez et gérez vos capteurs et actionneurs !</p>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark w-100">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-tree-fill"></i> Eco-Logement</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logements.html">Logements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="consommation.html">Consommation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="configuration.html">Configuration</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="config-container">
+    <div id="left-panel">
+        <h3 id="left-panel-title">Liste des Logements</h3>
+        <ul id="left-panel-list" class="list-group"></ul>
+    </div>
+
+    <div id="right-panel">
+        <h3 id="right-panel-title">Configurer un Logement</h3>
+        <form id="logement-form" style="display:none;">
+            <div class="mb-3">
+                <label for="adresse" class="form-label">Adresse</label>
+                <input type="text" id="adresse" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="num_tel" class="form-label">Numéro de Téléphone</label>
+                <input type="text" id="num_tel" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="adresse_IP" class="form-label">Adresse IP</label>
+                <input type="text" id="adresse_IP" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter Logement</button>
+        </form>
+
+        <form id="piece-form" style="display:none;">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom de la Pièce</label>
+                <input type="text" id="nom" class="form-control" required>
+                <label for="nom" class="form-label">Localisation de la Pièce</label>
+                <input type="text" id="localisation" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter Pièce</button>
+        </form>
+
+        <form id="capteur-form" style="display:none;">
+            <div class="mb-3">
+                <label for="type" class="form-label">Type de Capteur</label>
+                <input type="text" id="type" class="form-control" required>
+                <label for="type" class="form-label">Réference Commercial</label>
+                <input type="text" id="ref_commercial" class="form-control" required>
+                <label for="type" class="form-label">Port</label>
+                <input type="text" id="port" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter Capteur</button>
+        </form>
+
+        <form id="actionneur-form" style="display:none;">
+            <div class="mb-3">
+                <label for="type" class="form-label">Type d'Actionneur</label>
+                <input type="text" id="type" class="form-control" required>
+                <label for="type" class="form-label">Réference Commercial</label>
+                <input type="text" id="ref_commercial" class="form-control" required>
+                <label for="type" class="form-label">Port</label>
+                <input type="text" id="port" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter Actionneur</button>
+        </form>
+    </div>
+    </div>
+    <script src="assets/js/configuration.js"></script>
+</body>
+</html>

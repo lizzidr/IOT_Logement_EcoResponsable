@@ -1,0 +1,318 @@
+/* Global Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0D1F2D, #546A7B);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1, h5 {
+            margin: 0;
+            padding: 0;
+}
+
+
+        
+.hero h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); /* Ajoute un effet de texte */
+            padding-left: 200px;
+            padding-right: 200px;
+}
+        
+.hero p {
+            font-size: 1.25rem;
+            margin: 20px 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+        
+.hero .btn {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+}
+
+.hero {
+    text-align: center;
+    padding: 30px;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* Navbar */
+.navbar {
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            height: 60px;
+}
+
+.navbar-brand, .nav-link {
+            color: #ffffff !important;
+}
+
+.nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #ffffff;
+}
+
+
+
+/* Navbar */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+}
+
+.nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #ffffff;
+}
+
+#dynamic-content {
+    display: flex;
+    margin: auto;
+    width: 100vh;
+}
+
+.row.g-4 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: auto;
+    gap: 50px; /* Espace entre les cartes */
+}
+
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 0px;
+    margin: 0px;
+}
+
+
+/* Glassmorphism Cards */
+.icon-card {
+    width: 150px;             /* Taille fixe des cartes */
+    height: 150px;            /* Hauteur fixe des cartes */
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+
+.icon-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.icon-card i {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.icon-card h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Styles des boutons pour un design cohérent avec le thème */
+button {
+    background-color: #868686;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Personnaliser les conteneurs pour le détail des capteurs et mesures */
+h3.text-center {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1rem;
+    color: #000000;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+ul li strong {
+    color: #000000;
+}
+
+/* Ajustement de la disposition pour les détails du capteur */
+.row.g-4 {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.col-md-6 {
+    margin-bottom: 30px;
+}
+
+/* Style général du contenu */
+.container {
+    display: block;
+    max-width: 960px; /* Limite la largeur du contenu pour éviter qu'il ne soit trop large */
+    margin: 0 auto; /* Centrer le contenu */
+    padding: 0;
+}
+
+/* Style pour le titre */
+h3.text-center {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Cartes contenant les détails et le graphique */
+.card {
+    background-color: #f9f9f9; /* Fond clair pour les cartes */
+    border: 1px solid #ddd; /* Légère bordure */
+    border-radius: 10px;
+    width: 500px;
+}
+
+/* Style des listes dans les cartes */
+.card ul {
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.card li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.card h5 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Ajout d'une ombre légère aux cartes */
+.card.shadow-sm {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Espacement autour des éléments */
+.mb-4 {
+    margin-bottom: 30px;
+}
+
+.mt-4 {
+    margin-top: 30px;
+}
+
+/* Graphique */
+canvas#mesuresGraph {
+    height: 500px; /* Fixer une hauteur appropriée au graphique */
+    margin-top: 20px;
+}
+
+/* Bouton "Retour aux capteurs" */
+button.btn-primary {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button.btn-primary:focus {
+    outline: none;
+}
+
+#logement-name {
+    background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+    color: #333; /* Couleur du texte */
+    font-size: 0.8rem; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    padding: 10px; /* Espacement autour du texte */
+    border-radius: 10px; /* Bords arrondis */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre portée légère */
+    text-align: center; /* Centrer le texte */
+    max-width: 200px; /* Limiter la largeur pour qu'il ne soit pas trop large */
+    margin: 20px auto; /* Centrer la div sur la page */
+    
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: #ffffff;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
