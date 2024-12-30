@@ -355,7 +355,84 @@ def controle_led():
         'action': etatLED
     })
 
+#### API pour suppression ####
+# Route pour supprimer un logement 
+@app.route('/logement/<int:id_logement>', methods=['DELETE'])
+def delete_logement(id_logement):
+    conn = db_connection()
 
+    # Supprimer toutes les pièces associées au logement
+    pieces = conn.execute('SELECT id FROM Piece WHERE id_logement = ?', (id_logement,)).fetchall()
+    for piece in pieces:
+        delete_piece(piece['id'])  # Appeler la fonction delete_piece pour chaque pièce
+
+    # Supprimer le logement
+    cursor = conn.execute('DELETE FROM Logement WHERE numero = ?', (id_logement,))
+    conn.commit()
+    conn.close()
+
+    if cursor.rowcount == 0:
+        return jsonify({'status': 'error', 'message': 'Logement non trouvé !'}), 404
+
+    return jsonify({'status': 'success', 'message': 'Logement et ses dépendances supprimés avec succès !'})
+
+# Route pour supprimer une piece 
+@app.route('/piece/<int:id_piece>', methods=['DELETE'])
+def delete_piece(id_piece):
+    conn = db_connection()
+
+    # Supprimer tous les capteurs associés à la pièce
+    capteurs = conn.execute('SELECT id FROM Capteur WHERE ref_piece = ?', (id_piece,)).fetchall()
+    for capteur in capteurs:
+        delete_capteur(capteur['id'])  # Appeler la fonction delete_capteur pour chaque capteur
+
+    # Supprimer tous les actionneurs associés à la pièce
+    actionneurs = conn.execute('SELECT id FROM Actionneur WHERE ref_piece = ?', (id_piece,)).fetchall()
+    for actionneur in actionneurs:
+        delete_actionneur(actionneur['id'])  # Appeler la fonction delete_actionneur pour chaque actionneur
+
+    # Supprimer la pièce
+    cursor = conn.execute('DELETE FROM Piece WHERE id = ?', (id_piece,))
+    conn.commit()
+    conn.close()
+
+    if cursor.rowcount == 0:
+        return jsonify({'status': 'error', 'message': 'Pièce non trouvée !'}), 404
+
+    return jsonify({'status': 'success', 'message': 'Pièce et ses dépendances supprimées avec succès !'})
+
+# Route pour supprimer un capteur
+@app.route('/capteur/<int:id_capteur>', methods=['DELETE'])
+def delete_capteur(id_capteur):
+    conn = db_connection()
+
+    # Supprimer les mesures associées au capteur
+    conn.execute('DELETE FROM Mesure WHERE id_capteur = ?', (id_capteur,))
+
+    # Supprimer le capteur
+    cursor = conn.execute('DELETE FROM Capteur WHERE id = ?', (id_capteur,))
+    conn.commit()
+    conn.close()
+
+    if cursor.rowcount == 0:
+        return jsonify({'status': 'error', 'message': 'Capteur non trouvé !'}), 404
+
+    return jsonify({'status': 'success', 'message': 'Capteur et ses mesures supprimés avec succès !'})
+
+# Route pour supprimer un actionneur 
+@app.route('/actionneur/<int:id_actionneur>', methods=['DELETE'])
+def delete_actionneur(id_actionneur):
+    conn = db_connection()
+
+    # Supprimer l'actionneur
+    cursor = conn.execute('DELETE FROM Actionneur WHERE id = ?', (id_actionneur,))
+    conn.commit()
+    conn.close()
+
+    if cursor.rowcount == 0:
+        return jsonify({'status': 'error', 'message': 'Actionneur non trouvé !'}), 404
+
+    return jsonify({'status': 'success', 'message': 'Actionneur supprimé avec succès !'})
 
 
 if __name__ == '__main__':

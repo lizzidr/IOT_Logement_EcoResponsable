@@ -156,7 +156,6 @@ button {
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }

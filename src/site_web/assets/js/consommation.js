@@ -74,7 +74,7 @@ function updateFactureTable(factures) {
         row.innerHTML = `
             <td>${facture.date_insertion}</td>
             <td>${facture.type_facture}</td>
-            <td>${facture.montant.toFixed(2)}</td>
+            <td>${facture.montant}</td>
             <td>${valeurConsommee}</td>
         `;
         factureTable.appendChild(row);

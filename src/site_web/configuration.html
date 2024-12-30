@@ -145,6 +145,26 @@
             
         }
 
+        .mini-card {
+            position: relative;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            border: none !important;
+            background: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+
         /* Custom Scrollbar */
         #left-panel::-webkit-scrollbar {
             width: 8px;
@@ -292,11 +312,11 @@
         <form id="actionneur-form" style="display:none;">
             <div class="mb-3">
                 <label for="type" class="form-label">Type d'Actionneur</label>
-                <input type="text" id="type" class="form-control" required>
+                <input type="text" id="type_A" class="form-control" required>
                 <label for="type" class="form-label">Réference Commercial</label>
-                <input type="text" id="ref_commercial" class="form-control" required>
+                <input type="text" id="ref_commercial_A" class="form-control" required>
                 <label for="type" class="form-label">Port</label>
-                <input type="text" id="port" class="form-control" required>
+                <input type="text" id="port_A" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Ajouter Actionneur</button>
         </form>

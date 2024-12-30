@@ -96,7 +96,7 @@ INSERT INTO Piece (nom, localisation, id_logement)
 INSERT INTO TypeCA (nom, unite, plage)
     VALUES ('Capteur de Temperature', '°C', '-40/60');
 INSERT INTO TypeCA (nom, unite, plage)
-    VALUES ('Capteur de Luminosité"', 'Lux', '0/1000');
+    VALUES ('Capteur de Luminosite"', 'Lux', '0/1000');
 INSERT INTO TypeCA (nom, unite, plage)
     VALUES ('Capteur de Consommation Electrique', 'kWh', '0/1000');
 

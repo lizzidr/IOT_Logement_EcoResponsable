@@ -48,16 +48,38 @@ document.addEventListener("DOMContentLoaded", function () {
                     cardTitle.className = "card-title";
                     cardTitle.textContent = logement.adresse;
 
-                    // Contenu de la carte (icone + nom)
-                    const cardContent = document.createElement("div");
-                    cardContent.className = "card-content";
-                    cardContent.appendChild(icon);
-                    cardContent.appendChild(cardTitle);
+                    // Bouton de suppression
+                    const deleteButton = document.createElement("button");
+                    deleteButton.className = "delete-btn"; // Classe CSS pour styliser le bouton "x"
+                    deleteButton.textContent = "x";
+
+                    // Ajouter un gestionnaire d'événement pour supprimer le logement
+                    deleteButton.addEventListener("click", (event) => {
+                        event.stopPropagation(); // Empêcher le clic de se propager à la carte
+                        if (confirm(`Êtes-vous sûr de vouloir supprimer le logement à l'adresse "${logement.adresse}" ?`)) {
+                            fetch(`${API_BASE}/logement/${logement.numero}`, { method: "DELETE" })
+                                .then(response => {
+                                    if (response.ok) {
+                                        loadLogements(); // Recharger la liste des logements après suppression
+                                    } else {
+                                        alert("Erreur lors de la suppression du logement.");
+                                    }
+                                })
+                                .catch(error => console.error("Erreur lors de la suppression du logement", error));
+                        }
+                    });
 
                     // Ajouter un événement au clic pour charger les pièces
                     card.addEventListener("click", () => {
                         loadPieces(logement.numero); // Charger les pièces du logement
                     });
+
+                    // Contenu de la carte (icone + nom)
+                    const cardContent = document.createElement("div");
+                    cardContent.className = "card-content";
+                    cardContent.appendChild(icon);
+                    cardContent.appendChild(cardTitle);
+                    cardContent.appendChild(deleteButton);
 
                     // Ajouter le contenu à la carte
                     card.appendChild(cardContent);
@@ -98,11 +120,31 @@ document.addEventListener("DOMContentLoaded", function () {
                     cardTitle.className = "card-title";
                     cardTitle.textContent = piece.nom;  // Nom de la pièce
 
+                    // Bouton de suppression
+                    const deleteButton = document.createElement("button");
+                    deleteButton.className = "delete-btn";
+                    deleteButton.textContent = "x";
+
+                    deleteButton.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        if (confirm(`Êtes-vous sûr de vouloir supprimer la pièce "${piece.nom}" ?`)) {
+                            fetch(`${API_BASE}/piece/${piece.id}`, { method: "DELETE" })
+                                .then(response => {
+                                    if (response.ok) {
+                                        loadPieces(currentLogementId); // Recharger les pièces
+                                    } else {
+                                        alert("Erreur lors de la suppression de la pièce.");
+                                    }
+                                })
+                                .catch(error => console.error("Erreur lors de la suppression de la pièce", error));
+                        }
+                    });
                     // Contenu de la carte (icône + nom)
                     const cardContent = document.createElement("div");
                     cardContent.className = "card-content";
                     cardContent.appendChild(icon);
                     cardContent.appendChild(cardTitle);
+                    cardContent.appendChild(deleteButton);
 
                     // Ajouter un événement au clic pour charger les capteurs et actionneurs
                     card.addEventListener("click", () => {
@@ -130,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fonction de chargement des capteurs avec l'icône associée
     function loadCapteursAndActionneurs(pieceId, idLogement) {
+        currentLogementId = idLogement
         currentPieceId = pieceId;
 
         leftPanelList.innerHTML = ""; // Vider la liste actuelle
@@ -144,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Ajouter le gestionnaire d'événements pour le retour
         backButton.addEventListener("click", function() {
-            loadPieces(idLogement);  // Charger les pièces (vous devez définir cette fonction)
+            loadPieces(currentLogementId);  // Charger les pièces (vous devez définir cette fonction)
         });
 
         // Créer un bouton pour basculer entre les formulaires
@@ -198,10 +241,30 @@ document.addEventListener("DOMContentLoaded", function () {
                     cardTitle.className = "card-title";
                     cardTitle.textContent = capteur.typeCA;  // Nom du capteur/actionneur
                     
+                    // Bouton de suppression
+                    const deleteButton = document.createElement("button");
+                    deleteButton.className = "delete-btn";
+                    deleteButton.textContent = "x";
+
+                    deleteButton.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        if (confirm(`Êtes-vous sûr de vouloir supprimer le capteur "${capteur.typeCA}" ?`)) {
+                            fetch(`${API_BASE}/capteur/${capteur.id}`, { method: "DELETE" })
+                                .then(response => {
+                                    if (response.ok) {
+                                        loadCapteursAndActionneurs(currentPieceId, currentLogementId);
+                                    } else {
+                                        alert("Erreur lors de la suppression du capteur.");
+                                    }
+                                })
+                                .catch(error => console.error("Erreur lors de la suppression du capteur", error));
+                        }
+                    });
+
                     // Contenu de la carte (icône + nom)
                     card.appendChild(icon);
                     card.appendChild(cardTitle);
-
+                    card.appendChild(deleteButton);
                     // Ajouter la carte au conteneur
                     capteursList.appendChild(card);
 
@@ -236,9 +299,30 @@ document.addEventListener("DOMContentLoaded", function () {
                     cardTitle.className = "card-title";
                     cardTitle.textContent = actionneur.typeCA;  // Nom du capteur/actionneur
                     
+                    // Bouton de suppression
+                    const deleteButton = document.createElement("button");
+                    deleteButton.className = "delete-btn";
+                    deleteButton.textContent = "x";
+
+                    deleteButton.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                        if (confirm(`Êtes-vous sûr de vouloir supprimer l'actionneur "${actionneur.typeCA}" ?`)) {
+                            fetch(`${API_BASE}/actionneur/${actionneur.id}`, { method: "DELETE" })
+                                .then(response => {
+                                    if (response.ok) {
+                                        loadCapteursAndActionneurs(currentPieceId, currentLogementId);
+                                    } else {
+                                        alert("Erreur lors de la suppression de l'actionneur.");
+                                    }
+                                })
+                                .catch(error => console.error("Erreur lors de la suppression de l'actionneur", error));
+                        }
+                    });
+
                     // Contenu de la carte (icône + nom)
                     card.appendChild(icon);
                     card.appendChild(cardTitle);
+                    card.appendChild(deleteButton);
 
                     // Ajouter la carte au conteneur
                     actionneursList.appendChild(card);
@@ -365,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            loadCapteursAndActionneurs(currentPieceId); // Recharger les capteurs de la pièce après l'ajout
+            loadCapteursAndActionneurs(currentPieceId, currentLogementId); // Recharger les capteurs de la pièce après l'ajout
         })
         .catch(error => console.error("Erreur lors de l'ajout du capteur", error));
     });
@@ -374,9 +458,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("actionneur-form").addEventListener("submit", function (event) {
         event.preventDefault();
         const data = {
-            typeCA: document.getElementById("type").value,
-            ref_commercial: document.getElementById("ref_commercial").value,
-            port: document.getElementById("port").value
+            typeCA: document.getElementById("type_A").value,
+            ref_commercial: document.getElementById("ref_commercial_A").value,
+            port: document.getElementById("port_A").value
         };
 
         fetch(`${API_BASE}/piece/${currentPieceId}/actionneurs`, {
@@ -388,7 +472,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            loadCapteursAndActionneurs(currentPieceId); // Recharger les capteurs de la pièce après l'ajout
+            loadCapteursAndActionneurs(currentPieceId, currentLogementId); // Recharger les capteurs de la pièce après l'ajout
         })
         .catch(error => console.error("Erreur lors de l'ajout du capteur", error));
     });

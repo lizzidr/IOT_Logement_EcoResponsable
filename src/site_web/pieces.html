@@ -28,11 +28,30 @@
             border-bottom: 2px solid #ffffff;
         }
 
+        /* Conteneur des cartes de factures - permettre le scroll horizontal */
         #dynamic-content {
-            display: flex;
-            margin: auto;
-            width: 100vh;
+            display: flex;              /* Disposition en ligne (flexbox) */
+            overflow-x: auto;           /* Permet le défilement horizontal */
+            padding: 10px;              /* Un peu de padding autour */
+            gap: 10px;                  /* Espacement entre les cartes */
+            scroll-snap-type: x mandatory; /* Un peu d'effet "snap" pour le défilement */
         }
+
+        /* Style pour chaque carte - pour les aligner horizontalement */
+        .card {
+            flex: 0 0 auto;             /* Ne pas étirer les cartes, elles occupent leur largeur */
+            width: 190px !important;               /* Largeur fixe pour chaque carte */
+            box-sizing: border-box;     /* Inclure les bordures et le padding dans la largeur */
+            scroll-snap-align: start;   /* Le défilement s'arrête au début de chaque carte */
+        }
+
+        /* Optionnel : Style du conteneur pour avoir un effet de shadow pour les cartes */
+        .card-body {
+            background-color: #f9f9f9;  /* Fond clair pour la carte */
+            border-radius: 8px;          /* Coins arrondis */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
 
         .row.g-4 {
             display: flex;

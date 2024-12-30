@@ -2,7 +2,7 @@ import sqlite3, random
 from datetime import datetime
 
 # ouverture/initialisation de la base de donnee
-conn = sqlite3.connect('C:/Users/idril/Documents/EI4/IOT_LogementEcoresponsable/sqlite/logement.db')
+conn = sqlite3.connect('C:/Users/idril/Documents/EI4/IOT_LogementEcoresponsable/src/logement.db')
 conn.row_factory = sqlite3.Row
 c = conn.cursor()
 
